@@ -5,12 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 Class Model_data extends CI_Model{
 
 	public function load_karyawan(){
-		$sql = $this->db->query("SELECT * FROM tb_karyawan WHERE flag = 1");
+		$sql = $this->db->query("SELECT * FROM tb_anggota_tni WHERE flag = 1");
 		return $sql->result_array();
 	}
 
 	public function ambil_data_anggota(){
-		$sql = $this->db->query("SELECT * FROM tb_karyawan WHERE flag = 1");
+		$sql = $this->db->query("SELECT * FROM tb_anggota_tni WHERE flag = 1");
 		return $sql->result_array();
 	}
 
@@ -21,14 +21,14 @@ Class Model_data extends CI_Model{
 		$alamat = $this->db->escape($post['alamat']);
 		$email = $this->db->escape($post['email']);
 
-		$sql = $this->db->query("INSERT INTO tb_karyawan VALUES (NULL, $nama, $alamat, $email, 1)");
+		$sql = $this->db->query("INSERT INTO tb_anggota_tni VALUES (NULL, $nama, $alamat, $email, 1)");
 		if($sql)
 			return true;
 		return false;
 	}
 
 	public function get_default($id){
-		$sql = $this->db->query("SELECT * FROM anggota_tni WHERE id = ".intval($id));
+		$sql = $this->db->query("SELECT * FROM tb_anggota_tni WHERE id = ".intval($id));
 		if($sql->num_rows() > 0)
 			return $sql->row_array();
 		return false;
@@ -41,13 +41,13 @@ Class Model_data extends CI_Model{
 		$email = $this->db->escape($post['email']);
 		$pangkat = $this->db->escape($post['pangkat']);
 
-		$sql = $this->db->query("UPDATE anggota_tni SET name = $nama, alamat = $alamat, email = $email, pangkat = $pangkat WHERE id = ".intval($id));
+		$sql = $this->db->query("UPDATE tb_anggota_tni SET name = $nama, alamat = $alamat, email = $email, pangkat = $pangkat WHERE id = ".intval($id));
 
 		return true;
 	}
 
 	public function hapus($id){
-		$sql = $this->db->query("UPDATE tb_karyawan SET flag = 0 WHERE id = ".intval($id));
+		$sql = $this->db->query("UPDATE tb_anggota_tni SET flag = 0 WHERE id = ".intval($id));
 	}	
 
 }
